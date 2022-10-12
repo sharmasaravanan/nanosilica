@@ -8,7 +8,6 @@ from matplotlib import pyplot as plt
 import streamlit as st
 from PIL import Image
 import joblib
-import numpy as np
 
 
 st.set_page_config(page_title='Nano Silica Analysis', layout='wide', initial_sidebar_state='auto')
@@ -85,7 +84,7 @@ if data_file is not None:
         with st.spinner('Wait for it...'):
             time.sleep(3)
 
-        predicted = list(model.predict(scaler.transform(np.asarray(x))).flatten())
+        predicted = list(model.predict(scaler.transform(x)))
         testData['CompressiveStrength'] = predicted
 
         col1, col2 = st.columns(2)
