@@ -12,6 +12,7 @@ import seaborn as sns
 from IPython.display import display
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.ensemble import AdaBoostRegressor
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
@@ -141,3 +142,8 @@ model.save('nanoSilica.h5')
 
 # evaluating model
 evaluation(model, X_test, y_test)
+
+# secondary model
+ada = AdaBoostRegressor(n_estimators=500)
+ada.fit(X_train, y_train)
+joblib.dump(ada, open(os.path.join('model', 'adaModel.pkl'), 'wb'))
